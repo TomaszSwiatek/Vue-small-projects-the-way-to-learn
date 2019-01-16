@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"
+    />
+    <style>
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin: 2rem 5rem;
+      }
+      .button,
+      .tag {
+        margin-top: 1rem;
+        padding: 0 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="box ">
+        <button @click="increment" class="button is-primary">+</button>
+        <button @click="decrement" class="button is-danger">-</button>
+        <p>this is our dynamic state at now: {{ count }}.</p>
+        <h4 class="">This is component with bound dynamic state:</h4>
+        <!-- here we re using state -->
+        <span class="tag is-black"><child :count="count"></child></span>
+        <h4 class="">This is static value bound with prop:</h4>
+        <!-- here we re using static value -->
+        <span class="tag is-black"><child count="1"></child></span>
+      </div>
+    </div>
+    <script>
+      //vue component____________________________________________________
+      Vue.component("child", {
+        props: {
+          count: {
+            //jeden z propsow o takiej samej nazwie jak zmienna
+            type: Number, //validacja propsów - wyj. creatin an component
+            required: true
+          }
+        }, //end of props
+        template: `<div class="num"> {{ count }} </div>` //wstawiony props w template
+      });
+      //vue component end____________________________________________________
+
+      //_______________________________________________________
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            count: 0 //zmienna do przekazania w propsach
+          };
+        },
+        methods: {
+          increment() {
+            this.count++;
+          },
+          decrement() {
+            this.count--;
+          }
+        }
+      }); //end of vue constructor___________________________________
+    </script>
+  </body>
+</html>

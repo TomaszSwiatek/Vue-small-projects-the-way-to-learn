@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- :text it is v-bind directive -->
+    <div id="app"><child :text="message"></child></div>
+    <script>
+      // Vue.component("child", {
+      //   props: ["text"],
+      //   template: `<div>{{text}}</div>`
+      // }); //end of child component - component have to be before an constructor.
+
+      // COMPONENT WITH VALIDATION IN PROPS - CHECK IS VARIABLE PASSED INTO PROP - validation is only in development mode
+      Vue.component("child", {
+        props: {
+          text: {
+            type: String,
+            required: true
+          }
+        },
+        template: `<div>{{text}}</div>`
+      }); //end of child component with validation. this time we re creating an object instead table. - validation is only in development mode
+
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            message: "Tak to właśnie wiadomość z serca Vue."
+          };
+        }
+      }); //end of Vue constructor
+    </script>
+  </body>
+</html>

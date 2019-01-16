@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <style>
+      #app {
+        /* make site full height and gives padding. also some delay for changing color after mouse is moved */
+        width: 100vw;
+        height: 100vh;
+        padding: 15vmin;
+        transition: background-color 1s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <!--  -->
+    <!-- wykorzystanie dyrektywy vue - v-bind (możliwości: Bind attributes dynamically, or pass props). skrótem tej dyrektywy jest ":". nie wszystkie dyrektywy mają skróty. bindujemy color, zmienną x w konstruktorze vue przypisujemy do współrzednych myszy - e.clientX. Na zdarzenie @mousemove wywołujemy tą funkcję która przypisuje do {{x}} współrzedne. x zapisujemy jako zmienną wewnatrz funkcji hsl(). koniec. to co zrobiliśmy to tak naprawde zbindowalismy zmienna do stylu. reszta to przypisanie funkcji do eventu. Warto zauważyć że nie musielismy w ogole tworzyc zmiennej w evencie by pisać co ma robić event - vue już wie to za nas kiedy przekazujemy prosta zmienna tylko z przypisanymi parametrami ( jednak musimy to dac jako parametr funkcji.)  -->
+    <div
+      id="app"
+      :style="{ backgroundColor: `hsl( ${x}, 80%, 40%)`}"
+      @mousemove="getXMousePosition"
+    >
+      <p>Odległość od osi x okna przeglądarki: {{ x }}</p>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            counter: 0,
+            x: 0
+          };
+        },
+        methods: {
+          increment() {
+            this.counter++;
+          },
+          decrement() {
+            this.counter--;
+          },
+          getXMousePosition(e) {
+            this.x = e.clientX;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

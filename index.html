@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- vue - development version -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <button @click="increment">Zwiększaj {{ counter }}</button>
+      <p>{{ counter }}</p>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          //piszemy w ten sposob ze wzgledu na skladnie ES6 (nie trzeba podawac pary właściwość: wartość)
+          return {
+            counter: 0
+          }; //przechowujemy dane w funkcji to bardziej reużywalny kod wtedy
+        },
+        methods: {
+          //to jest obiekt w którym przechowujemy w funkcje. paradoksalnie w funkcji data przechowujemy dane.
+          increment() {
+            this.counter++;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
