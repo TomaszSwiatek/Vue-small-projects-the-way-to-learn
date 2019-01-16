@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add comment app - Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"
+    />
+    <style>
+      .card {
+        width: 20vw;
+        /* text-align: center; */
+        opacity: 0.7;
+        background-color: #047b7a;
+        color: white;
+      }
+
+      #app {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-image: url(https://cdn.pixabay.com/photo/2018/06/13/09/32/technology-3472294_960_720.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <individual-comment ></individual-comment>  tym razem nie odwolujemy sie tak tylko piszemy w tagach li ktore wczesniej tez byly w template is="individual-comment"  to pewnie drugi sposob na wywolanie komponentu -->
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Add a comment</p>
+          <a href="#" class="card-header-icon" aria-label="more options"> </a>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <ul>
+              <li
+                is="individual-comment"
+                v-for="comment in comments"
+                v-bind:commentpost="comment"
+              ></li>
+            </ul>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">
+            <input
+              class="input is-info is-focused"
+              v-model="newComment"
+              v-on:keyup.enter="addComment"
+              placeholder="add a comment"
+          /></a>
+        </footer>
+      </div>
+    </div>
+    <script>
+      Vue.component("individual-comment", {
+        props: ["commentpost"],
+        template: `<li> {{ commentpost }} </li>`
+      });
+
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            newComment: "",
+            comments: [
+              "Tak powiedziałem coś",
+              "kolejny komentarz",
+              "Hej - fajnie skomentować"
+            ]
+          };
+        },
+        methods: {
+          addComment() {
+            this.comments.push(this.newComment);
+            // this.newComment = "";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
