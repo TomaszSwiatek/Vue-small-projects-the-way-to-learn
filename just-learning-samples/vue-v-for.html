@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v if v show</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <!-- https://www.youtube.com/watch?v=9Hcswbo0nCY&list=PL4cUxeGkcC9gQcYgjhBoeQH7wiAyZNrYa&index=13 -->
+    <div id="example">
+        <ul>
+            <li v-for="postać in postacie"> {{postać}} </li>
+            <li v-for="potwor in potwory"> {{potwor.typ}}, niebezpieczeństwo: {{potwor.niebezpieczeństwo}} </li>
+        </ul>
+        <!-- ok at now how we output  ( jak wyswietlamy ) the index: -->
+        <ul>
+            <li v-for="(potwor, index) in potwory">{{index}}, {{potwor.typ}} </li>
+        </ul>
+        <!-- ok. nie musimy tego zamykać w li, możemy to zorbić w czymkolwiek, np. w div. -->
+        <div v-for="potwor in potwory">
+            <h3>{{potwor.typ}}</h3>
+            <p>Ten potwór w pięciostopniowej skali niebezpieczeństwa osiąga liczbę: {{potwor.niebezpieczeństwo}}</p>
+        </div>
+        <!-- jednak zamykanie tego w divie to oplatanie bez sensu jezeli nie potrzebuje tego stylowanie. mozemy to zamknac w tag template charakterystyczny dla vue i on zwroci nam tylko to co jest w srodku: -->
+        <br>
+        <template v-for="potwor in potwory">
+            <h3>{{potwor.typ}}</h3>
+            <p>Ten potwór w pięciostopniowej skali niebezpieczeństwa osiąga liczbę: {{potwor.niebezpieczeństwo}}</p>
+        </template>
+        <!-- czesem chcemy poporstu ziterowac i ladnie wyswietlic wszystko co jest w tablicy obiektów, wtedy trzeba wpierw ziterowac tablice i wyswietlic obiekty, a potem za pomoca tej zmiennej iteracyjnej po ktorej odnosilismy sie do pojedynczego obiektu - iterujemy po value i key of objects: -->
+        <template v-for="potwor in potwory">
+            <!-- w pojedynczym potworze iterujemy od razu po value i key:) -->
+            <div v-for="(val,key) in potwor"> {{key}} - {{val}} </div>
+        </template>
+    </div>
+    <script>
+
+
+        var watchExampleVM = new Vue({
+            el: '#example',
+            data: {
+                postacie: ['wiedźmin', 'ciri', 'yennefer', 'zoltan'],
+                potwory: [
+                    {
+                        typ: 'strzyga',
+                        niebezpieczeństwo: 3
+                    },
+                    {
+                        typ: 'upiór',
+                        niebezpieczeństwo: 2
+                    },
+                    {
+                        typ: 'mantikora',
+                        niebezpieczeństwo: 4
+                    }
+
+                ]
+
+            },
+            methods: {
+
+            },
+
+            computed: {
+
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .static-box {
+            width: 30vw;
+            height: 30vh;
+            background-color: blueviolet;
+            opacity: 0.5;
+        }
+
+        .active {
+            opacity: 1;
+        }
+
+        .text-danger {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods -->
+    <div id="vbind-example">
+        <!-- <div class="static-box" :class="{ active : isActive, 'text-danger' : hasError }"></div> -->
+        <!-- opcja z ternary operator: sam musialem dodac property active i przypisac jej string active bo inaczej nie chcialo dzialac wlaczenie tej klasy.  -->
+        <div class="static-box" :class="[isActive ? active : '', 'text-danger']"></div>
+    </div>
+    <script>
+        var watchExampleVM = new Vue({
+            el: '#vbind-example',
+            data: {
+
+                isActive: true,
+                active: 'active'
+            }
+
+        })
+    </script>
+</body>
+
+</html>

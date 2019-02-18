@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <!-- https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods -->
+    <div id="vbind-example">
+        <p :style="{color: activeColor, fontSize: activeSize}">To jest tekst, w którym możesz zmienić kolor i wielkość
+            czcionki</p>
+        <input type="text" v-model="activeColor">
+        <input type="text" v-model="activeSize">
+        <p>Color of text is : {{activeColor}}</p>
+    </div>
+    <script>
+
+
+        var watchExampleVM = new Vue({
+            el: '#vbind-example',
+            data: {
+                activeColor: '',
+                activeSize: ''
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>

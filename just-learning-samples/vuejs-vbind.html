@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <a :href="website">Elektryk Poznań</a>
+        <p v-html="websitesTag"></p>
+        <h1>events</h1> //jezeli do eventu dodajemy nazwe - to vue wie ze to musi byc funkcja, dlatego tez nie dajemy
+        nawiasów. tu akurat dalismy cialo funkcji a nie jej nazwe <button v-on:click="age++">add a year</button>
+        <button v-on:click="age--">subtract a year</button>
+        <p>My age is {{age}}</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app', data: {
+                website: 'http://www.oswietlenieilampy.pl',
+                websitesTag: '<a : href="website">Elektryk Poznań</a>',
+                age: 31
+            }
+        });
+    </script>
+</body>
+
+</html>

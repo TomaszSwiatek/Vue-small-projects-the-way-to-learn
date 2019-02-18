@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>uzywanie wąsów : {{rawHtml}}</p>
+        <!-- przypisujemy do spanu jeszcze jeden span, tylko teraz z stylem; -->
+        <!-- w skrócie dyrektywa v-html zamienia plain text na html.tej dyrektywy nie mozna wykorzystaw w czesciowych szablonach (template partials) bo szablony html vue nie bazują na stingach, wiec nie da sie zamienic czegos co nie jest stringiem na html.  -->
+        <p>using v-html directive: <span v-html="rawHtml"></span></p>
+        <!-- data binding: v-bind. Mozna przekazać tylko jedno wyrażenie. wyrazenie nie moze byc statementem. musi byc to pojedyncze wyrazenie. a i trzeba dla wyrazen uzywac ternary expressions.  -->
+        <!-- wyrazenie globalne - podwójne wąsy moga się odwolywać tylko do obiektów globalnych jak math czy date, natomiast do zdefioniowanych przez uzytkownika juz nie i nie powinnien tego robic. -->
+        <!-- dyrektywy:
+        v-if -->
+        <p v-if="seen">widzisz to bo seen = true, to znaczy albo istnieje i nie jest pustym stringiem, albo jest true
+            booleanem.</p>
+        <!-- dynamiczne przekazywanie - bindowanie atrybutów:  -->
+        <!-- NIE DZIALA  - SPRAWDZIC -->
+        <button v-on:[nameAttribute]="changeBackground">Change background</button>
+        <!-- MODIFIERS - wystepuja po kropce za zbindowanym argumentem.  -->
+        <!-- tu np dodatkowo proszony jest event.preventDefault() -->
+        <form action="" v-on:submit.prevent="onSubmit"></form>
+        <!-- używanie logiki w szablonach - wyrazen z warunkami, czy js ktory zmienia te elementy w jakis sposob jest wygodne, ale trzeba ja za kazdym razem potwarzac a pozatym moze posowowac brak przejrzystosci i ze szblony nei beda deklaratywne reuzywalne etc. kazda wieksza logike piszemy osobno z computed property! -->
+        <!-- dlatego taka logikę jak ta wrzucamy do computed (czyli obliczonych wartości):  -->
+        <p>{{wiadomosc}}</p>
+        <p>{{odwroconaWiadomosc}}</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                rawHtml: '<span style="color: red">To powinno być czerwone</span>',
+                seen: "dsd",
+                nameAttribute: 'click',
+                wiadomosc: 'Siema Jurku!'
+            },
+            methods: {
+                changeBackground() {
+                    let paragraphs = document.querySelectorAll('p');
+                    paragraphs.style.backgroundColor = "red";
+                }
+            },
+            // to jest sekcja computed bo tu wrzucamy wyrazenia do obliczenia które normalnie obliczalibyśmy w szablonie, ale tą złożoną logikę przenosimy wlasnie tutaj:
+            computed: {
+                odwroconaWiadomosc: function () {
+                    return this.wiadomosc.split("").reverse().join("");
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

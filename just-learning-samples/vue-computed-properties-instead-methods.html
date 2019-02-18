@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue computed vs methods</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="example">
+        <!-- computed properties mozna uzywac zamiast metod by zwiekszyc efektywynosc aplikacji. ponieważ jeżeli uruchomimy jeden event to wywoluja sie wszystkie metody, co jest niefajne, a computed properties tylko przekazuja - uaktualnianaj konkretna wartosc i tyle.  -->
+        <button @click="a++">Add to A</button>
+        <button @click="b++">Add to B</button>
+        <p>Your Age: {{age}}</p>
+        <p>A: {{a}}</p>
+        <p>B: {{b}}</p>
+        <!-- tu bez nawiasów w podwójnych wąsach - czyli to jest roznica do metod -->
+        <p>Your Age with added A: {{addToA}}</p>
+        <p>Your Age with added B: {{addToB}}</p>
+    </div>
+    <script>
+
+
+        var watchExampleVM = new Vue({
+            el: '#example',
+            data: {
+                age: 21,
+                a: 0,
+                b: 0
+
+            },
+            methods: {
+
+            },
+            computed: {
+                //mimo ze podajemy to dokladnie tak jak funkcje - to nie jest funkcja i referencję w html w {{}} podajemy bez nawiasów().
+                addToA() {
+                    console.log('addToA');
+
+                    return this.a + this.age;
+                },
+                addToB() {
+                    console.log('addToB');
+
+                    return this.age + this.b;
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

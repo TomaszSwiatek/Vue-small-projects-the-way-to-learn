@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .static-box {
+            width: 30vw;
+            height: 30vh;
+            background-color: blueviolet;
+            opacity: 0.5;
+        }
+
+        .active {
+            opacity: 1;
+        }
+
+        .text-danger {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods -->
+    <div id="vbind-example">
+        <!-- te klasy dodane w komponenecie odnosza sie do kazdego elementu wewnatrz - i dodaja sie na koncu. oczywiscie moglbym tu tez zastosowac klasy dynamiczne - tzn zbindowane.  -->
+        <component-with-class class="trzecia czwarta"></component-with-class>
+        <!-- klasy zbindowane -->
+        <component-with-class :class="{active: isActive}"></component-with-class>
+    </div>
+    <script>
+        Vue.component('component-with-class', {
+            template: '<p class="jedna druga">Sprawdz dodane klasy - f12</p>'
+
+        });
+
+        var watchExampleVM = new Vue({
+            el: '#vbind-example',
+            data: {
+                // dlaczego nie w obiekcie tylko juz brane stąd- pewnie dlatego że inicjuemy ta klase juz w stworzonym komponencie.
+                isActive: true
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue dynamic classes</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        span {
+            background: red;
+            display: inline-block;
+            padding: 10px;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .available span {
+            background: green;
+        }
+
+        .nearby span::after {
+            content: "nearby";
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example">
+        <!-- w tym przypadku zwrócimy obiekt z klasami. Zrobimy to za pomocą computed - wiec do klasy przypiszemy jakby funkcję - bo w computed zapisujemy wszzystko jako funkcje anonimowe - mimo że one tak naprawde nimi nie są - lub są specyficznymi które tylko updatują wartość. (hooks functions ? ). Funkcja zwróci OBIEKT Z KLASAMI. dane do klas zostaną pobrane z obiektu data w instancji Vue.  -->
+        <button @click="available = !available">change available</button>
+        <button @click="nearby = !nearby">toggle nearby</button>
+        <div :class="compClasses">
+            <span>Tomek kierowca</span>
+        </div>
+    </div>
+    <script>
+
+
+        var watchExampleVM = new Vue({
+            el: '#example',
+            data: {
+                // tu montujemy wwszystkie dane
+                available: false,
+                nearby: false
+
+            },
+            methods: {
+
+            },
+            //natomiast tu przkeazujemy dane z daty ktorymi bedziemy chcieli dynamicznie zarzadzac i wewnatrz mozemy je grupować w np. obiekty które potem przekażemy jako obiekt klas do zbindowanego atrybtu klasy w html
+            computed: {
+                compClasses() {
+                    return {
+                        // to tworzymy obiekt i jest dwie zmienne, kdo których przypisujemy dane z obiektu data
+                        available: this.available,
+                        nearby: this.nearby
+                    }
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

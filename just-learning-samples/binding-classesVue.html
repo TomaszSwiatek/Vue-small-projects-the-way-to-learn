@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .static-box {
+            width: 30vw;
+            height: 30vh;
+            background-color: blueviolet;
+            opacity: 0.5;
+        }
+
+        .active {
+            opacity: 1;
+        }
+
+        .text-danger {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods -->
+    <div id="vbind-example">
+        <!-- zależnie od wartosci boolean w data wyświetlą się klasy active lub text - danger. w tym wypadku static i active. Active jest zalezne od przypisanego property isActive.  -->
+        <!-- jak widac oprocz dynamicznych klas mozna przypisac tez zwykłą klase statyczną. tzw plain html ;)  -->
+        <!-- pojedyncze cudzyslowy dajemy tylko dlatego, że text jest w kebabie, w innym wypadku ten bajer nie jest potrzebny ale z myslinkiem niestety tak. -->
+        <!-- pierwszy sposób -->
+        <!-- <div class="static-box" :class="{ active : isActive, 'text-danger' : hasError }"></div> -->
+        <!-- drugi i trzeci - bo może być tylko z obiektem w data, lub z obiektem w computed odowolujacym sie do danych w data. - to ponoć jest powerfull. -->
+        <div class="static-box" :class="classObject"></div>
+    </div>
+    <script>
+        var watchExampleVM = new Vue({
+            el: '#vbind-example',
+            data: {
+                //prvi - przekazywanie inline bez obiektu.
+                // isActive: true,
+                // hasError: true
+                //drugi sposob
+                // classObject: {
+                //     active: true,
+                //     'text-danger': true
+                // },
+                //trzeci sposob
+                isActive: true,
+                error: false
+            },
+            //trzeci sposób
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.error,
+                        'text-danger': this.error
+                    }
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

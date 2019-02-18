@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue dynamic classes</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        span {
+            background: red;
+            display: inline-block;
+            padding: 10px;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .available span {
+            background: green;
+        }
+
+        .nearby span::after {
+            content: "nearby";
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example">
+        <!-- dynamiczna klase chcemy przekazać w obiekcie - wiec pojedyncze wąsy. mozemy od razu okreslac czy maja sie pojawiac za pomocą boolean -->
+        <!-- taki przypadek to hardcoding bo ciezko tym zarzadzac dynamicznie -->
+        <div :class="{red: true, blue: false}"></div>
+        <!-- schemat jak niżej <div :class="{nazwaWymyślonejKlasyKtoraSiePojawi: nazwaZmiennejBooleanKtoraZarzadzaDynamicznie}"></div> . Z tego co kojarze w ES6 jak jest taki zapis to można go skrócić i pisać tylko raz {available} umjesto {available: available}  -->
+        <div @click="available = !available" :class="{available: available}">
+            <span>kierowca Tomek</span>
+        </div>
+    </div>
+    <script>
+
+
+        var watchExampleVM = new Vue({
+            el: '#example',
+            data: {
+                available: true
+
+            },
+            methods: {
+
+            },
+            computed: {
+
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <listazakupow v-for="zakup in groszekList" :itemlisty="zakup" :key="zakup.id"></listazakupow>
+        </ol>
+    </div>
+    <script>
+        Vue.component('listazakupow', {
+            // props nie moze byc ani camel case ani nawet kebab-case - to znaczy musi byc ciagiem znakow i nie moze miec myslinkow
+            props: ['itemlisty'],
+            template: '<li>{{ itemlisty.text }}</li>'
+
+        });
+        var app = new Vue({
+            el: '#app',
+            data: {
+                groszekList: [
+                    {
+                        id: 0, text: 'kredki'
+                    },
+                    {
+                        id: 1, text: 'farba'
+                    },
+                    {
+                        id: 2, text: 'pedzle'
+                    }
+                ]
+            }
+        })
+    </script>
+    <!-- <div id="apka">
+        <ol>
+            <lista v-for="item in groceryList" :todo="item" :key="item.id">
+            </lista>
+        </ol>
+    </div>
+    <script>
+        // tworzymy komponent "lista" - to komponent ma propsy do ktorych nei sa przypisane zadne dane. props jest powiazany w templacie wewnatrez budowy komponentu.
+        Vue.component('lista', {
+            props: ['todo'],
+            template: '<li>{{todo.text}}</li>'
+        });
+        // w instancji Vue  za to przechowywane sa dane, nazwa instancji, czy metody, cze metody specyficzne .
+        var app7 = new Vue({
+            el: '#apka',
+            data: {
+                groceryList: [
+                    {
+                        id: 0,
+                        text: "kill them all"
+                    },
+                    {
+                        id: 1,
+                        text: 'no w8'
+                    },
+                    {
+                        id: 2,
+                        text: "hit yourself"
+                    }
+                ]
+            }
+        })
+    </script> -->
+    <!-- <div id="app7">
+        <ol>
+            <todo-item v-for="item in groceryList" :todo="item" :key="item.id"></todo-item>
+        </ol>
+    </div>
+    <script>
+
+        //_____________________________________________
+        // creating (registering ) a component in Vue :
+
+        Vue.component('todo-item', {
+            props: [
+                'todo'
+            ], //tu akurat tablica
+            template: '<li>{{ todo.text }}</li>'
+        });
+
+        var app7 = new Vue({
+            el: '#app7',
+            data: {
+                groceryList: [
+                    { id: 0, text: 'Vegetables' },
+                    { id: 1, text: 'Cheese' },
+                    { id: 2, text: 'Pomodores' },
+                ]
+            }
+        });
+
+    </script> -->
+</body>
+
+</html>

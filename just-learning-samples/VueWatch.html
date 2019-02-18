@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods -->
+    <div id="watch-example">
+        <p> Ask a yes/no question: <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+        <p>Opis własny: Jak widać watch cały czas trzyma uruchomioną funkcję w przeciwienstwie do computed, który tylko
+            raz oblicza ( chyba że wyola siego jako funkcje w wąsach w html ( ale to by trzeba doczytać). Taka
+            funkcjonalnosc pomaga w obsłudze dużej ilości danych takich jak Api i innych asynchronicznych połączeń.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+        var watchExampleVM = new Vue({
+            el: '#watch-example',
+            data: {
+                question: '',
+                answer: 'I cannot give you an answer until you ask a question!'
+            },
+            watch: {
+                // whenever question changes, this function will run
+                question: function (newQuestion, oldQuestion) {
+                    this.answer = 'Waiting for you to stop typing...'
+                    this.debouncedGetAnswer()
+                }
+            },
+            created: function () {
+                // _.debounce is a function provided by lodash to limit how
+                // often a particularly expensive operation can be run.
+                // In this case, we want to limit how often we access
+                // yesno.wtf/api, waiting until the user has completely
+                // finished typing before making the ajax request. To learn
+                // more about the _.debounce function (and its cousin
+                // _.throttle), visit: https://lodash.com/docs#debounce
+                this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+            },
+            methods: {
+                getAnswer: function () {
+                    // indexOf method is searching string which is declared in brackets.
+                    // Ta metoda zwraca - 1, jeśli wartość do wyszukiwania nigdy nie występuje.
+                    if (this.question.indexOf('?') === -1) {
+                        this.answer = 'Questions usually contain a question mark. ;-)'
+                        return
+                    }
+                    this.answer = 'Thinking...'
+                    var vm = this
+                    axios.get('https://yesno.wtf/api')
+                        .then(function (response) {
+                            vm.answer = _.capitalize(response.data.answer)
+                        })
+                        .catch(function (error) {
+                            vm.answer = 'Error! Could not reach the API. ' + error
+                        })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

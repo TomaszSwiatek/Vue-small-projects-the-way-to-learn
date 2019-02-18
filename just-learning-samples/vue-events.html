@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue events</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .box {
+            width: 30vw;
+            height: 30vh;
+            border: grey 1px solid;
+            text-align: center;
+            line-height: 30vh;
+            /* padding: 50; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods -->
+    <div id="example">
+        <!-- przy eventach jest specyficznie bo compilator domysla sie ze bedzie to kod js wiec nie musimy tego brac w jakies wąsy czy cudzysłowiaS -->
+        <button @click=age++>Increase</button>
+        <button @click=age-->decrease</button>
+        <!-- <button @dblclick=age=age-2>decrease 2 years</button> -->
+        <!-- można tez zdefiniowac metodę i w ten sposob uprzyjemnić widok bezpośrendio w html: -->
+        <button @click=decrease(10)>decrease 10 years</button>
+        <button @click=decrease(5)>decrease 5 years</button>
+        <!-- event modifiers -->
+        <button @click.once=age++>only once increase</button>
+        <p>My age is : {{age}}</p>
+        <!-- kolejny modifier - .prevent - zabezpiecza przed defaultowymi zdarzeniami. w tym przypadku mimo ze dodalismy event to przeniosl by nas na strone w linku ale nie zrobi tego bo doeventu - mimo ze to inny event dodalismy prevent i tylko wyswietli event customowy. -->
+        <a @click.prevent=clickAlert href="http://www.elektryk.oswietlenieilampy.pl">Elektryk Poznań</a>
+        <!-- w sumie jak damy cudzyslowy otaczajace metode to nic sie nie stanie ale w events nie trzeba -->
+        <div class="box" @mousemove=followXY> {{x}}, {{y}} </div>
+    </div>
+    <script>
+
+
+        var watchExampleVM = new Vue({
+            el: '#example',
+            data: {
+                age: 21,
+                // mogłoby by być tez 0 jako wartosc poczatkowa - takie zainicjowanie zmiennej.
+                x: null,
+                y: null
+            },
+            methods: {
+                decrease(years) {
+                    // this.age = this.age - years;
+                    // w skrócie
+                    this.age -= years;
+                },
+                followXY(event) {
+
+                    console.log(event);
+                    this.x = event.offsetX;
+                    this.y = event.offsetY;
+
+                },
+                clickAlert() {
+                    console.log('you clicked me');
+
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v if v show</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <!-- ROZNICA POMIEDZY V-SHOW - nie wiem czy da sie tez zrobic esle w vshow, ale v-show ustawia display na none ale nie usuwa elementu z DOM, natomiast v-if całkowicie wywala węzeł z DOM -->
+    <!-- dobra opcja by w aplikacji pogodowej pokazywać ukrywać szczegóły, defaultowo bym je schował -->
+    <div id="example">
+        <button @click="error = !error">Toggle error</button>
+        <button @click="success = !success">Toggle success</button>
+        <!-- <p v-if="error">opps, error, check it!</p> -->
+        <!-- to sie pojawi tylko wtedy kiedy v-if error = false. inaczej nie bedzie sukcesu - co jest logiczne -->
+        <!-- jak załączy sie error a byl wczesniej success to jak sie wyaczy error to tez widac sekcje success -->
+        <!-- <p v-else-if="success">Whooo ooo success.</p> -->
+        <!-- ---------------------------------- -->
+        <!-- teraz o v-show - -->
+        <p v-show="success">success</p>
+        <p v-show="error">error</p>
+    </div>
+    <script>
+
+
+        var watchExampleVM = new Vue({
+            el: '#example',
+            data: {
+                error: false,
+                success: false
+            },
+            methods: {
+
+            },
+
+            computed: {
+
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>
