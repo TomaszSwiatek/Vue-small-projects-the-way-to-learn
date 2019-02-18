@@ -7,26 +7,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Simple Game - detonate the bomb</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <style>
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <!-- https://www.youtube.com/watch?v=9Hcswbo0nCY&list=PL4cUxeGkcC9gQcYgjhBoeQH7wiAyZNrYa&index=13 -->
-    <div id="example">
+    <div id="app">
+        <!-- bomb image -->
+        <div class="bomb" :class="{'bomb-detonated': ended}"></div>
+        <!--  time remaining until the explosion -->
+        <div class="bomb-time">
+            <div :style="{width: time + '%'}"></div>
+        </div>
+        <!-- control buttons -->
+        <button @click="subtractTime" v-show="!ended">Try to detonate</button>
+        <button @click="restartGame" class="restart">Restart game</button>
     </div>
     <script>
 
 
         var simpleGame = new Vue({
-            el: '#example',
+            el: '#app',
             data: {
-
+                ended: false,
+                time: 100,
+                error: ""
             },
             methods: {
+                subtractTime() {
+                    this.time = Math.random() * this.time;
+                    // checks - is less time than 3 points ? - if yes - then end game.
+                    this.time < 3 ? this.time = 0 : null
+                    //if game is ended - then add binded class to ended property (ended is now true so class will be shown).
+                    this.time <= 0 ? this.ended = true : null
+                },
+                restartGame() {
+                    this.time = 100;
+                    this.ended = false;
 
+                }
             },
-
             computed: {
 
             }
