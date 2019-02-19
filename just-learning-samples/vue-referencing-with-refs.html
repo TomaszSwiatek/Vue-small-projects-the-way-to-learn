@@ -13,40 +13,40 @@
 
 <body>
     <div id="app1">
-        <h2>{{title}}</h2>
-        <greeting></greeting>
-    </div>
-    <div id="app2">
-        <h2>{{title}}</h2>
-        <greeting></greeting>
+        <!-- jest to cos innego niz vmodel bo nie dziala nonstop, ale mozna refowac wiele rzeczy by dostac sie do wlasciwosci wewnatrz elementu i użyć ich gdzie indziej.  -->
+        <input type="text" ref="input1">
+        <button @click="showInputRef">show input content</button>
+        <p>{{showIt}}</p>
+        <h3 ref=testText>This is h3.</h3>
+        <button @click="showH3ref">show h3 ref</button>
+        <p id="paragraph">here will appear h3 text: </p>
     </div>
     <script>
-        Vue.component("greeting", {
-            template: '<p>These are re-useable greetings from an only one Vue component'
-        })
+
 
         var app1 = new Vue({
             el: '#app1',
             data: {
-                title: 'this is first app'
+                showIt: ''
             },
             computed: {
 
-            }
-
-        })
-
-        var app2 = new Vue({
-            el: '#app2',
-            data: {
-                title: 'this is second app'
             },
-            computed: {
+            methods: {
+                showInputRef() {
+                    console.log(this.$refs); //zwraca obiekt z ciekawymi właśiwościami, my korzystamy z value wewnatrz klucza ktory jest naszym refem. znajduje takie refy jakie zdeklarowalismy w html wew. tej instancji.
+                    this.showIt = this.$refs.input1.value;
 
+                },
+                showH3ref() {
+                    document.querySelector('#paragraph').innerText += ` ${this.$refs.testText.innerText}`;
+                }
             }
+
+
         })
-        // do danych instancji mozemy tez sie odwolac Z ZEWNĄTRZ:
-        app2.title = 'i ve changed title output of all of instances';
+
+
     </script>
 </body>
 
