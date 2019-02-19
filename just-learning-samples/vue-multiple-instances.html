@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue multiple instances</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app1">
+        <h2>{{title}}</h2>
+        <p>{{greeting}}</p>
+    </div>
+    <div id="app2">
+        <h2>{{title}}</h2>
+        <!-- jako ze jest to funkcja w compiuted to nie podajemy nawiasow za wywolaniem() -->
+        <p>{{greeting}}</p>
+        <button @click="changeApp1title">Change title</button>
+    </div>
+    <script>
+        var app1 = new Vue({
+            el: '#app1',
+            data: {
+                title: 'this is first app'
+            },
+
+            computed: {
+                greeting() {
+                    return "hello from first app!"
+                }
+            }
+
+        })
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                title: 'this is second app'
+            },
+            methods: {
+                changeApp1title() {
+                    app1.title = "Title changed by instance named : app2";
+                }
+            },
+
+            computed: {
+                greeting() {
+                    return "hello from second app!"
+                }
+            }
+        })
+        // do danych instancji mozemy tez sie odwolac Z ZEWNĄTRZ:
+        app2.title = 'i ve changed title output of all of instances';
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue multiple instances</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app1">
+        <h2>{{title}}</h2>
+        <greeting></greeting>
+    </div>
+    <div id="app2">
+        <h2>{{title}}</h2>
+        <greeting></greeting>
+    </div>
+    <script>
+        Vue.component("greeting", {
+            template: '<p>These are re-useable greetings from an only one Vue component'
+        })
+
+        var app1 = new Vue({
+            el: '#app1',
+            data: {
+                title: 'this is first app'
+            },
+            computed: {
+
+            }
+
+        })
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                title: 'this is second app'
+            },
+            computed: {
+
+            }
+        })
+        // do danych instancji mozemy tez sie odwolac Z ZEWNĄTRZ:
+        app2.title = 'i ve changed title output of all of instances';
+    </script>
+</body>
+
+</html>
