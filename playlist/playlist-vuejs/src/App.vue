@@ -3,7 +3,8 @@
   <!-- to jest rootowy component aplikacji w ktorej mozemy zagniezdzac inne komponenty. -->
   <div>
     <app-header></app-header>
-    <characters></characters>
+    <!-- jezeli chcemy przekazac props musimy to zrobic dynamicznie - dlatego też musimy zbindowac propsa robimy to tak: :characters="characters", gdzie :nazwaPropaWewChildcomponent="nazwaZmiennej/ObiektuWewDatyApp-komponentuRodzica" -->
+    <characters :characters="characters"></characters>
     <app-footer></app-footer>
   </div>
 </template>
@@ -22,7 +23,20 @@ export default {
     "app-footer": Footer
   },
   data() {
-    return {};
+    return {
+      characters: [
+        { name: "Wiedźmin", speciality: "Troubles", show: false },
+        { name: "Yennefer", speciality: "Spell", show: false },
+        { name: "Ciri", speciality: "Personal charm", show: false },
+        { name: "Zoltan", speciality: "Card games", show: false },
+        {
+          name: "Jaskier",
+          speciality: "Playing on the instruments",
+          show: false
+        },
+        { name: "Milva", speciality: "Archery", show: false }
+      ]
+    };
   }
 };
 </script>

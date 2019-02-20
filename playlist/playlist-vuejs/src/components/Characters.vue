@@ -15,21 +15,9 @@
 
 <script>
 export default {
+  props: ["characters"], //chcemy otrzymac dane z root componentu i przekazac je dalej do v-for wiec piszemy to co napiszemy lub napisalismy w-forze czyli nazwe obiektu.
   data() {
-    return {
-      characters: [
-        { name: "Wiedźmin", speciality: "Troubles", show: false },
-        { name: "Yennefer", speciality: "Spell", show: false },
-        { name: "Ciri", speciality: "Personal charm", show: false },
-        { name: "Zoltan", speciality: "Card games", show: false },
-        {
-          name: "Jaskier",
-          speciality: "Playing on the instruments",
-          show: false
-        },
-        { name: "Milva", speciality: "Archery", show: false }
-      ]
-    };
+    return {};
   }
 };
 </script>
