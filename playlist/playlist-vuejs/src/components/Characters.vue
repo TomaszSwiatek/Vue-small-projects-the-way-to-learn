@@ -15,7 +15,14 @@
 
 <script>
 export default {
-  props: ["characters"], //chcemy otrzymac dane z root componentu i przekazac je dalej do v-for wiec piszemy to co napiszemy lub napisalismy w-forze czyli nazwe obiektu.
+  // props: ["characters"], //chcemy otrzymac dane z root componentu i przekazac je dalej do v-for wiec piszemy to co napiszemy lub napisalismy w-forze czyli nazwe obiektu.
+  //zamiast przekazywania tablicy z propsami mozemy stworzy obiekt by dodac validacje:
+  props: {
+    characters: {
+      type: Array, //spodziewamy sie otrzymac tablice (obiektów)
+      required: true
+    }
+  },
   data() {
     return {};
   }
