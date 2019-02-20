@@ -10,6 +10,7 @@
         <h3 v-show="character.show">{{character.speciality}}</h3>
       </li>
     </ul>
+    <button @click="deleteCharacter">Delete character</button>
   </div>
 </template>
 
@@ -25,6 +26,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    deleteCharacter() {
+      this.characters.pop(); //metoda pop wywala ostatni item z tablicy.
+    }
   }
 };
 </script>

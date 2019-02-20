@@ -6,10 +6,13 @@
 
 <script>
 export default {
+  props: {
+    title: {
+      type: String
+    }
+  },
   data() {
-    return {
-      title: "Witcher's characters"
-    };
+    return {};
   }
 };
 </script>
