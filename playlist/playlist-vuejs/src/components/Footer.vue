@@ -1,11 +1,17 @@
 <template>
   <footer>
-    <p>{{copyright}}</p>
+    <p>Title of website: {{title}}</p>
+    <p>{{copyright}}.</p>
   </footer>
 </template>
 
 <script>
 export default {
+  props: {
+    title: {
+      type: String
+    }
+  },
   data() {
     return {
       copyright: `Copyright ${this.getYear()}. Respect this or witcher will follow you.`

@@ -6,7 +6,7 @@
     <!-- jezeli chcemy przekazac props musimy to zrobic dynamicznie - dlatego też musimy zbindowac propsa robimy to tak: :characters="characters", gdzie :nazwaPropaWewChildcomponent="nazwaZmiennej/ObiektuWewDatyApp-komponentuRodzica" -->
     <!-- reasumujac: jeżeli chcę w nawiasach przekazać obiekt a nie string to musze zbindować propsa.     <characters :prop="obiekt"></characters> -->
     <characters :characters="characters"></characters>
-    <app-footer></app-footer>
+    <app-footer :title="title"></app-footer>
   </div>
 </template>
 
