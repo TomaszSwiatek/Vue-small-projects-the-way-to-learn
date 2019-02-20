@@ -16,7 +16,9 @@ export default {
   },
   methods: {
     changeTitle() {
-      this.title = "Charming characters";
+      // this.title = "Charming characters";
+      //natomiast jezeli chcemy wemitowac event aby ta funkcja zmieniala wszystkie propy we wszystkich komponentach to musimy zrobic tak: (taki sam prop jest jeszcze ustawiony w footerze - podejrzyj tagi html w app.vue):
+      this.$emit("changeTitle", "Charming characters"); //dwa argumenty metody: $emit('nazwaEmitowanejMetody', "zmienianaWartosc")
     }
   }
 };
