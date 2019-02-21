@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { bus } from "../main";
 export default {
   props: {
     title: {
@@ -18,7 +19,11 @@ export default {
     changeTitle() {
       // this.title = "Charming characters";
       //natomiast jezeli chcemy wemitowac event aby ta funkcja zmieniala wszystkie propy we wszystkich komponentach to musimy zrobic tak: (taki sam prop jest jeszcze ustawiony w footerze - podejrzyj tagi html w app.vue):
-      this.$emit("changeTitle", "Charming characters"); //dwa argumenty metody: $emit('nazwaEmitowanejMetody', "zmienianaWartosc")
+      // this.$emit("changeTitle", "Charming characters"); //dwa argumenty metody: $emit('nazwaEmitowanejMetody', "zmienianaWartosc")
+      //opcja trzecia : uzycie bus event:
+      this.title = "Charming Characters";
+      // emitujemy by reactywnie wplynac na footer, ale nie zmienimy za pomocą tego wartosci w headerze wiec powyzej poprostu przypisujemy wartosc nowa do title;
+      bus.$emit("titleChanged", this.title);
     }
   }
 };

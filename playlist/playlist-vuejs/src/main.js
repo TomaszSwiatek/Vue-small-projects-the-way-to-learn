@@ -5,6 +5,9 @@ import App from './App.vue'
 
 // rejestrowanie komponentu globalnie odbywa sie w ten sposób. jako drugi argument przekazujemy obiekt, ten który importujemy z scriptu w ktorym jest export{}. taka akcja. Taki globalny component bedzie mogl byc uzywany przez kazdego - tzn kazdy component w apce - też te child parenty.
 // Vue.component('characters', Characters);
+// tworzymy bus event - po to musimy stworzyc nową instancję vue. importujemy to do kompoenntow gdzie potrzbujemy tego uzyc
+//KONIECZNIE bus event trzeba stworzyc przed glowna instancja aplikacji bo inaczej bus event nei bedzie chcial dzialaC!
+export const bus = new Vue();
 
 new Vue({
   el: '#app',
