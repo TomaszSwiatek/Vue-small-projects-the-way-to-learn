@@ -14,30 +14,30 @@
 <script>
 // tak sie rejestruje komponent lokalnie - tylko app.vue bedzie mialo do niego dostęp. trzeba go tu importować:
 // dodatkowo w export defaults dodajemy sekcje : components: {}
-import Characters from "./components/Characters.vue";
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+import Characters from './components/Characters.vue';
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   components: {
     characters: Characters, //nazwa komponentu: nazwa obiektu komponentu
-    "app-header": Header, //to w sumie tutaj nadaje nazwę obiektowi - pewnie jezeli by nadac taka samą nazwę tagowi html jak nazwa obiektu ktory przekazujemy - ktory jest nazwa pliku komponentu to bysmy mogli to dzieki es6 zapisać tylko: Header
-    "app-footer": Footer
+    'app-header': Header, //to w sumie tutaj nadaje nazwę obiektowi - pewnie jezeli by nadac taka samą nazwę tagowi html jak nazwa obiektu ktory przekazujemy - ktory jest nazwa pliku komponentu to bysmy mogli to dzieki es6 zapisać tylko: Header
+    'app-footer': Footer
   },
   data() {
     return {
       title: "Witcher's characters", //goes to prop to app-header
       characters: [
-        { name: "Wiedźmin", speciality: "Troubles", show: false },
-        { name: "Yennefer", speciality: "Spell", show: false },
-        { name: "Ciri", speciality: "Personal charm", show: false },
-        { name: "Zoltan", speciality: "Card games", show: false },
+        { name: 'Wiedźmin', speciality: 'Troubles', show: false },
+        { name: 'Yennefer', speciality: 'Spell', show: false },
+        { name: 'Ciri', speciality: 'Personal charm', show: false },
+        { name: 'Zoltan', speciality: 'Card games', show: false },
         {
-          name: "Jaskier",
-          speciality: "Playing on the instruments",
+          name: 'Jaskier',
+          speciality: 'Playing on the instruments',
           show: false
         },
-        { name: "Milva", speciality: "Archery", show: false }
+        { name: 'Milva', speciality: 'Archery', show: false }
       ]
     };
   },
